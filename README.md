@@ -92,6 +92,6 @@ def predict_revenue(request: RegressionRequest):
 
 ## 구현 포인트
 
-
-- FastAPI 기반 AI 서버를 Spring 서버와 연동해 견적 검토, 전문가 추천, 매출 예측 기능을 구현했습니다.
-- Cloudflare Tunnel을 이용해 배포된 Spring 서버가 로컬 AI 서버와 통신할 수 있도록 연결했습니다.
+ - 전문가 견적 승인 및 거절 예측: NB
+ - 구독자 정보 기반, 다음 달 구독 매출 예측: RandomForest
+ - 개인 수출입 정보 기반 전문가 매칭: TFIDF, 벡터 유사도

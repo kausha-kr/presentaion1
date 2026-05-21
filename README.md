@@ -53,6 +53,12 @@ return {"prediction": prediction, "confidence": confidence}
 - 구독 취소 및 만료 데이터 반영
 - 다음 달 예상 구독 매출 계산
 
+<img width="1826" height="1102" alt="스크린샷 2026-05-21 091850" src="https://github.com/user-attachments/assets/e03ce418-7036-4a8a-971e-a33d5b410d99" />
+
+<img width="1912" height="1200" alt="스크린샷 2026-05-21 091844" src="https://github.com/user-attachments/assets/de544633-3c66-4fb0-ba07-6175e31bdaf1" />
+
+
+
 #### 대표 코드
 
 ```python
@@ -87,6 +93,10 @@ return {"expectedMonthlyRevenue": round(float(prediction), 2)}
 - 사용자와 전문가의 유사도 계산
 - 가장 잘 맞는 전문가 목록 추천
 
+
+<img width="1594" height="868" alt="스크린샷 2026-05-21 091736" src="https://github.com/user-attachments/assets/295bde4d-4d80-4a9c-9c92-b3e808a71263" />
+
+
 #### 대표 코드
 
 ```python
@@ -108,6 +118,37 @@ return {"experts": recommended_experts}
 
 ---
 
+
+
+### 4. 채팅 추천 문구 생성
+
+사용자가 채팅을 할 때 바로 보낼 수 있는 짧은 추천 문장을 만들어주는 기능입니다.  
+최근 대화 내용, 대화 단계, 사용자 의도, 원하는 말투, 감정 상태를 보고 자연스러운 문장 3개를 추천합니다.
+
+- 사용 기술: LLM, PromptTemplate
+- 사용 데이터: 최근 대화, 대화 단계, 사용자 의도, 말투, 감정 상태, 대화 주제, 작성 중인 문장
+- 결과: 클릭해서 바로 입력할 수 있는 추천 문구 3개
+
+대표 코드:
+
+```python
+prompt_template = PromptTemplate.from_template(template)
+prompt = prompt_template.format(**sample.to_dict())
+
+template = '''
+다음 채팅 상황을 보고 사용자가 바로 보낼 수 있는 짧은 추천문장 3개를 만들어줘.
+
+최근 대화:
+{recent_messages}
+
+대화 단계: {conversation_stage}
+사용자 의도: {user_intent}
+원하는 말투: {tone}
+감정 상태: {emotion_state}
+대화 주제: {topic}
+작성 중인 문장: {draft_input}
+'''
+
 ## 사용한 AI 기술
 
 | 기능 | 사용 기술 | 쉽게 설명 |
@@ -115,6 +156,8 @@ return {"experts": recommended_experts}
 | 전문가 견적 승인 및 거절 예측 | NB | 문장을 보고 승인될지 거절될지 분류하는 기술 |
 | 다음 달 구독 매출 예측 | RandomForest | 여러 조건을 보고 숫자 결과를 예측하는 기술 |
 | 전문가 매칭 | TF-IDF, 벡터 유사도 | 글자를 숫자로 바꿔서 서로 얼마나 비슷한지 비교하는 기술 |
+| 추천문구 | LLM, PromptTemplate | 최근 대화 내용, 대화 단계, 사용자 의도, 원하는 말투, 감정 상태를 보고 자연스러운 문장을 추천해주는 기술 |
+
 
 ---
 
